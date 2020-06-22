@@ -48,4 +48,4 @@ if __name__ == '__main__':
     server.start()
 
     # discordとの接続
-    client.run(os.environ('DISCORD_TOKEN'))
+    # client.run(os.environ('DISCORD_TOKEN'))
