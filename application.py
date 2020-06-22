@@ -13,22 +13,21 @@ async def on_message(msg):
     """bot動作本体の処理。チャネルにメッセージ送付されたときの処理"""
     message = msg.content
     if message.startswith('/choice'):
-        await msg.channel.send('システムテストOK')
-        # words = message.split()
-        #
-        # if (len(words) >= 2) and (words[1].isdecimal()):
-        #     # メッセージ第一引数までの数字をランダム選択する
-        #     try:
-        #         target = [x for x in range(int(words[1]))]
-        #     except:
-        #         await msg.channel.send('エラーが発生しました。第一引数には半角数字(1以上)を入力してください。')
-        #
-        #     decide = random.choice(target)
-        #     await msg.channel.send(str(decide) + 'でおねがいします!!!')
-        #
-        # else:
-        #     # validation error
-        #     await msg.channel.send('いくつまでの数字から選択するのか指定してください。1より大きい数字を入力してください。')
+        words = message.split()
+
+        if (len(words) >= 2) and (words[1].isdecimal()):
+            # メッセージ第一引数までの数字をランダム選択する
+            try:
+                target = [x for x in range(int(words[1]))]
+            except:
+                await msg.channel.send('エラーが発生しました。第一引数には半角数字(1以上)を入力してください。')
+
+            decide = random.choice(target)
+            await msg.channel.send(str(decide) + 'でおねがいします!!!')
+
+        else:
+            # validation error
+            await msg.channel.send('いくつまでの数字から選択するのか指定してください。1より大きい数字を入力してください。')
 
 
 @app.route('/')
@@ -43,10 +42,12 @@ def run():
 
 
 if __name__ == '__main__':
+    print('######### start ######')
     # アプリ(bot)の起動
     server = Thread(target=run)
     server.start()
 
     # discordとの接続
-    print(os.environ('DISCORD_TOKEN'))
+    with open('env-write.log', mode='w') as f:
+        f.write(os.environ('DISCORD_TOKEN'))
     client.run(os.environ('DISCORD_TOKEN'))
