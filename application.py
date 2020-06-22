@@ -33,7 +33,7 @@ client = discord.Client()
 @app.route('/')
 def health():
     """アプリ(bot)の生存確認"""
-    test = os.environ('DISCORD_TOKEN')
+    test = os.environ['DISCORD_TOKEN']
     return 'Bot is alive now. ' + test
 
 
@@ -48,4 +48,4 @@ if __name__ == '__main__':
     server.start()
 
     # discordとの接続
-    # client.run(os.environ('DISCORD_TOKEN'))
+    client.run(os.environ['DISCORD_TOKEN'])
