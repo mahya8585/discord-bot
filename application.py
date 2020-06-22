@@ -33,7 +33,8 @@ async def on_message(msg):
 @app.route('/')
 def health():
     """アプリ(bot)の生存確認"""
-    return 'Bot is alive now.'
+    test = os.environ('DISCORD_TOKEN')
+    return test
 
 
 def run():
@@ -42,12 +43,9 @@ def run():
 
 
 if __name__ == '__main__':
-    print('######### start ######')
     # アプリ(bot)の起動
     server = Thread(target=run)
     server.start()
 
     # discordとの接続
-    with open('env-write.log', mode='w') as f:
-        f.write(os.environ('DISCORD_TOKEN'))
     client.run(os.environ('DISCORD_TOKEN'))
