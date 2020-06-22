@@ -12,8 +12,8 @@ client = discord.Client()
 async def on_message(msg):
     """bot動作本体の処理。チャネルにメッセージ送付されたときの処理"""
     message = msg.content
-    if message.startwith('/choice'):
-        await message.channel.send('システムテストOK')
+    if message.startswith('/choice'):
+        await msg.channel.send('システムテストOK')
         # words = message.split()
         #
         # if (len(words) >= 2) and (words[1].isdecimal()):
